@@ -1,7 +1,7 @@
 CSV_to_JSON
 ===========
 
-This is a library of Perl scripts for converting CSV (or tab-, pipe- or colon-separated) files to JSON, useful if you just need to convert the data using the existing file headers. They doen't do anything fancy in terms of sorting or nesting the data.
+This is a library of Perl scripts for converting CSV (or tab-, pipe- or colon-separated) files to JSON, useful if you just need to convert the data using the existing file headers. They don't do anything fancy in terms of sorting or nesting the data.
 
 The library provided are: 1) CSV_to_JSON.pl, a standalone script that allows you to convert one file at a time using command-line options; 2) CSV_to_JSON_class.pm, a package that provider as a class that you can call from other scripts; and 3) converter_example.pl, an example of a Perl script that uses the class.
 
