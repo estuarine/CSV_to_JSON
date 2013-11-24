@@ -9,8 +9,8 @@ my $json = JSON->new;
 
 my %sepchar_options = ( 'colon' => ":",
                         'comma' => ",",
-                        'tab'   => "\t",
                         'pipe'  => "|",
+                        'tab'   => "\t",
                       );
                       
 my $sepchar = $sepchar_options{ $ARGV[2] } || ",";
