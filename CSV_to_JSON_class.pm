@@ -32,13 +32,11 @@ sub convert {
     
         }
 
-    my ($IN, $OUT) = process_params($self);
+    my ($fields, $IN, $OUT) = process_params($self);
     
-    my @fields = @{$IN->header};
-    
-    my @data = parse_file($IN, \@fields);
+    my $data = parse_file($IN, $fields);
 
-    my $data_json = encode_json \@data;
+    my $data_json = encode_json $data;
 
     print $OUT $data_json if $OUT;
     
@@ -65,13 +63,14 @@ sub process_params {
 
     my $infile = $params->{'inputfile'} || die "$!: Didn't specify inputfile.\n";
     my $IN = Tie::Handle::CSV->new($infile, header => 1, sep_char => $sepchar);
-
+    my @fields = @{$IN->header};
+    
     if ( $params->{'outputfile'} ) {
         my $outfile = $params->{'outputfile'};
         open $OUT, ">$outfile" or die "Can't open $outfile: $!\n";
         }
         
-    return ($IN, $OUT);
+    return (\@fields, $IN, $OUT);
 
     }
     
@@ -99,6 +98,6 @@ sub parse_file {
 
         }
     
-    return @array;
+    return \@array;
     
     }
