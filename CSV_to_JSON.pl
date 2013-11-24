@@ -54,7 +54,7 @@ sub process_input {
     my $infile = $ARGV[0] || 'Example.csv';
     my $IN = Tie::Handle::CSV->new($infile, header => 1, sep_char => $sepchar);
 
-    my $outfile = $ARGV[1] ||  'Example.json';
+    my $outfile = $ARGV[1] || 'Example.json';
     open my $OUT, ">$outfile" or die "Can't open $outfile: $!\n";
 
     return ($IN, $infile, $OUT, $outfile);
