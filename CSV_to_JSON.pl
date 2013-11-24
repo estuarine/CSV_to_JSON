@@ -7,13 +7,14 @@ binmode(STDOUT, ":utf8");
 
 my $json = JSON->new;
 
-my %sepchar_options = ( 'colon' => ":",
-                        'comma' => ",",
-                        'pipe'  => "|",
-                        'tab'   => "\t",
-                      );
+my %sepchar_options = ( "colon" => ":",
+                        "comma" => ",",
+                        "pipe"  => "|",
+                        "tab"   => "\t",
+                       );
                       
-my $sepchar = $sepchar_options{ $ARGV[2] } || ",";
+my $sepchar_input = $ARGV[2] || "comma";
+my $sepchar = $sepchar_options{$sepchar_input} || ",";
 
 my $infile = $ARGV[0] || 'Example.csv';
 my $IN = Tie::Handle::CSV->new($infile, header => 1, sep_char => $sepchar);
