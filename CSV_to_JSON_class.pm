@@ -32,10 +32,8 @@ sub convert {
     
         }
 
-    my $json = JSON->new;
-   
     my ($IN, $OUT) = process_params($self);
-
+    my $json = JSON->new;
     my @fields = @{$IN->header};
     my @data;
    
