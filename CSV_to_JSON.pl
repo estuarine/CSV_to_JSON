@@ -7,8 +7,18 @@ binmode(STDOUT, ":utf8");
 
 my $json = JSON->new;
 
+my %sepchar_options = ( 'colon' => ":",
+                        'comma' => ",",
+                        'tab'   => "\t",
+                        'pipe'  => "|",
+                      );
+                      
+my $sepchar = $sepchar_options{ $ARGV[2] } || ",";
+
+print "$sepchar\n";
+
 my $infile = $ARGV[0] || 'Example.csv';
-my $IN = Tie::Handle::CSV->new($infile, header => 1, sep_char => ",");
+my $IN = Tie::Handle::CSV->new($infile, header => 1, sep_char => $sepchar);
 
 my $outfile = $ARGV[1] ||  'Example.json';
 open my $OUT, ">$outfile" or die "Can't open $outfile: $!\n";
