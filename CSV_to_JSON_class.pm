@@ -32,7 +32,7 @@ sub convert {
     
         }
 
-    my ( $IN, $OUT ) = process_params($self);
+    my ($IN, $OUT) = process_params($self);
     my @fields = @{$IN->header};
     my @data;
    
