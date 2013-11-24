@@ -42,11 +42,17 @@ The construction of the converter object looks something like this:
                                             sepchar    => 'comma',
                                            );
                                            
-In this case, the simplest way of converting the file would be to call the class's "convert" method with no additional options, like so:
+The 'outputfile' and 'sepchar' parameters are optional. If you omit 'outputfile,' the method will convert and return the data but won't write it to a file. If you omit 'sepchar,' it will assume that the inputfile is comma-separated. The 'inputfile' parameter is mandatory; if you omit it, a fatal error will result. 
+
+In this example, the simplest way of converting the file would be to call the class's "convert" method with no additional options, like so:
+
+	my $json_data = $converter->convert;
+	
+If you don't plan to do anything with the data in the script and just want to save it to a file, you can do it this way:
 
 	$converter->convert;
-
-On the other hand, you could choose to pass all the options when invoking the convert method instead of when creating the object. That would look like this:
+	
+You can also pass all the parameter options when invoking the convert method instead of when creating the object. That would look like this:
 
 	my $converter = CSV_to_JSON_class->new;
 	
@@ -56,5 +62,3 @@ On the other hand, you could choose to pass all the options when invoking the co
                         );
 
 The example script combines the two -- providing all the needed parameters when creating the object but then overriding the 'outputfile' parameter when calling the method.
-
-However you do it, a fatal error will result if the inputfile and outputfile options are not defined. The package will assume that the sepchar is a comma unless specified otherwise.
