@@ -26,31 +26,17 @@ sub convert {
 
         my $it = natatime 2, @_;
 
-        while ( my ($key, $value) = $it->() ) {
+        while (my ($key, $value) = $it->() ) {
             $self->{$key} = $value;
             }
     
         }
 
     my ($IN, $OUT) = process_params($self);
-    my @fields = @{$IN->header};
-    my @data;
-   
-    while ( my $line = <$IN> ) {
-
-        my %hash;
     
-        foreach my $field(@fields) {
-        
-            my $value = $line->{$field} || '';
-            
-            $hash{$field} = $value;
-        
-            };
-
-        push @data, \%hash;
-
-        }
+    my @fields = @{$IN->header};
+    
+    my @data = parse_file($IN, \@fields);
 
     my $data_json = encode_json \@data;
 
@@ -72,7 +58,7 @@ sub process_params {
                             "comma" => ",",
                             "pipe"  => "|",
                             "tab"   => "\t",
-                          );
+                           );
                       
     my $sepchar_input = $params->{'sepchar'} || "comma";
     my $sepchar = $sepchar_options{$sepchar_input} || ",";
@@ -87,4 +73,32 @@ sub process_params {
         
     return ($IN, $OUT);
 
+    }
+    
+
+####################################
+
+sub parse_file {
+
+    my ($fh, $fields) = @_;
+    my @array;
+    
+    while (my $line = <$fh>) {
+
+        my %hash;
+    
+        foreach my $field(@$fields) {
+        
+            my $value = $line->{$field} || '';
+            
+            $hash{$field} = $value;
+        
+            };
+
+        push @array, \%hash;
+
+        }
+    
+    return @array;
+    
     }
