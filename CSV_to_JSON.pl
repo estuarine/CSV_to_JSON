@@ -15,8 +15,6 @@ my %sepchar_options = ( 'colon' => ":",
                       
 my $sepchar = $sepchar_options{ $ARGV[2] } || ",";
 
-print "$sepchar\n";
-
 my $infile = $ARGV[0] || 'Example.csv';
 my $IN = Tie::Handle::CSV->new($infile, header => 1, sep_char => $sepchar);
 
