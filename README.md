@@ -1,22 +1,16 @@
 CSV_to_JSON
 ===========
 
-This is an extremely simple Perl script to convert CSV files to JSON, useful if you just need to convert a file using the existing headers. It doesn't do anything fancy in terms of sorting or nesting the data.
+This is an extremely simple Perl script to convert CSV (or tab-, pipe- or colon-separated) files to JSON, useful if you just need to convert the data using the existing file headers. It doesn't do anything fancy in terms of sorting or nesting the data.
 
-Usage:
+You can specify the input and output files, as well as the separation character used in the input file, either by editing the code or by providing them on the command line. If you choose the latter, the format is:
 
-1) You can specify the input and output files either by editing the code or by providing them on the command line. If you choose the latter, the format is:
-
-	perl CSV_to_JSON.pl [input_file_name] [output_file_name]
+	perl CSV_to_JSON.pl [input_file_name] [output_file_name] [separation_character]
+	
+The allowed values for separation_character are "colon," "comma," "pipe" or "tab." You can easily add other characters by editing the %sepchar_options hash on lines 10-14.
 	
 The default is:
 
-	perl CSV_to_JSON.pl Example.csv Example.json
+	perl CSV_to_JSON.pl Example.csv Example.json comma
 	
-2) The file assumes that the input file is comma-separated. Editing the sep_char value on line 11 would allow you to specify another option like tab- or pipe-separated.
-
-3) The script's dependencies are Tie::Handle::CSV and JSON.
-
-
-
-
+The script's dependencies are Tie::Handle::CSV and JSON.
