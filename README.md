@@ -26,7 +26,7 @@ Dependencies are Tie::Handle::CSV and JSON.
 
 2) CSV_to_JSON_class.pm
 
-The package relies on the invoking script to provide the parameters 'inputfile,' 'outputfile' and 'sepchar' (as in 'separation character,' i.e. comma, tab, etc.) The sepchar option will default to 'comma' (i.e., it will assume the input file is CSV) but the package will throw a fatal error if the inputfile and outputfile aren't specified.
+The package relies on the invoking script to provide the parameters 'inputfile,' 'outputfile' and 'sepchar' (as in 'separation character,' such as comma, tab, etc.) The sepchar option will default to 'comma' (i.e., it will assume the input file is CSV) but the package will throw a fatal error if the inputfile and outputfile aren't specified.
 
 Dependencies are Moose, Modern::Perl, Tie::Handle::CSV, JSON and List::MoreUtils.
 
