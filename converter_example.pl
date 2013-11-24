@@ -7,4 +7,4 @@ my $converter = CSV_to_JSON_class->new( inputfile  => 'Example.csv',
                                         sepchar    => 'comma',
                                        );
 
-my $data = $converter->convert( outputfile => 'New_output_file.json' );
+my $json_data = $converter->convert( outputfile => 'New_output_file.json' );
