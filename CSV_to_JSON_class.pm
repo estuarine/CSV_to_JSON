@@ -4,12 +4,13 @@ use Modern::Perl;
 use Moose;
 use Tie::Handle::CSV;
 use JSON;
+use Data::Dumper;
 use List::MoreUtils qw(natatime);
 binmode(STDOUT, ":utf8");
 
 # Object-oriented version of CSV_to_JSON.pl for use in other scripts
 
-has [qw/ inputfile outputfile sepchar /] => ( is  => 'rw', isa => 'Str' );
+has [qw/ inputfile outputfile sepchar /] => ( is => 'rw', isa => 'Str' );
 
 # Make the class immutable to speed up Moose's performance
 __PACKAGE__->meta->make_immutable;
@@ -19,24 +20,21 @@ __PACKAGE__->meta->make_immutable;
 
 sub convert {
 
-    my $params = my $self = shift;
+    my $self = shift;
     
-    if (@_) { 
+    if (@_) {
 
         my $it = natatime 2, @_;
+
         while (my ($key, $value) = $it->() ) {
-        
-            $params->{$key} = $value;
-        
+            $self->{$key} = $value;
             }
     
         }
 
     my $json = JSON->new;
    
-    my ($IN, $infile, $OUT, $outfile) = process_input($params); 
-
-    print "... Converting '$infile' to '$outfile'\n";
+    my ($IN, $OUT) = process_params($self);
 
     my @fields = @{$IN->header};
     my @data;
@@ -53,22 +51,25 @@ sub convert {
         
             };
 
-        push @data, \%hash;   
+        push @data, \%hash;
 
         }
 
     my $data_json = encode_json \@data;
 
-    print $OUT $data_json;
+    print $OUT $data_json if $OUT;
+    
+    return $data_json;
 
     }
 
 
 ####################################
 
-sub process_input {
+sub process_params {
 
-    my $params = shift;
+    my $params= shift;
+    my $OUT;
 
     my %sepchar_options = ( "colon" => ":",
                             "comma" => ",",
@@ -82,9 +83,11 @@ sub process_input {
     my $infile = $params->{'inputfile'} || die "$!: Didn't specify inputfile.\n";
     my $IN = Tie::Handle::CSV->new($infile, header => 1, sep_char => $sepchar);
 
-    my $outfile = $params->{'outputfile'} || die "$!: Didn't specify outputfile.\n";
-    open my $OUT, ">$outfile" or die "Can't open $outfile: $!\n";
-
-    return ($IN, $infile, $OUT, $outfile);
+    if ( $params->{'outputfile'} ) {
+        my $outfile = $params->{'outputfile'};
+        open $OUT, ">$outfile" or die "Can't open $outfile: $!\n";
+        }
+        
+    return ($IN, $OUT);
 
     }
