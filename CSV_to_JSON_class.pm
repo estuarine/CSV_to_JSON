@@ -75,7 +75,7 @@ sub process_params {
                             "comma" => ",",
                             "pipe"  => "|",
                             "tab"   => "\t",
-                           );
+                          );
                       
     my $sepchar_input = $params->{'sepchar'} || "comma";
     my $sepchar = $sepchar_options{$sepchar_input} || ",";
