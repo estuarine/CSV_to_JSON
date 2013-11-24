@@ -33,7 +33,7 @@ Dependencies are Moose, Modern::Perl, Tie::Handle::CSV, JSON and List::MoreUtils
 
 3) converter_example.pl
 
-This is a short example showing how a script to use CSV_to_JSON_class.pm to convert a single file. It would obviously be easy to use it to convert multiple files as well.
+This is a short example showing how a script can use CSV_to_JSON_class.pm to convert a single file. It would obviously be easy to use it to convert multiple files as well.
 
 The construction of the converter object looks something like this:
 
