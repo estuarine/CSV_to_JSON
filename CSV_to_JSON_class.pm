@@ -26,7 +26,7 @@ sub convert {
 
         my $it = natatime 2, @_;
 
-        while (my ($key, $value) = $it->() ) {
+        while ( my ($key, $value) = $it->() ) {
             $self->{$key} = $value;
             }
     
