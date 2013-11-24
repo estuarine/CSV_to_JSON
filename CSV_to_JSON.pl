@@ -45,4 +45,4 @@ while (my $line = <$IN>) {
 
 my $data_json = encode_json \@data;
 
-say $OUT $data_json;
+print $OUT $data_json;
